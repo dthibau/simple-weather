@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>simple-weather</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>simple-weather</name>
 	<!-- FIXME change it to the project's website -->
 	<parent>
@@ -17,7 +17,7 @@
 		<url>https://github.com/dthibau/simple-weather</url>
 		<connection>scm:git:git://github.com/dthibau/simple-weather.git</connection>
 		<developerConnection>scm:git:git@github.com:dthibau/simple-weather.git</developerConnection>
-	  <tag>simple-weather-1.1</tag>
+	  <tag>HEAD</tag>
   </scm>
 	<dependencies>
 		<dependency>
