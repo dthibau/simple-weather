@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>simple-weather</artifactId>
+	<version>1.1</version>
+	<name>simple-weather</name>
+	<!-- FIXME change it to the project's website -->
+	<parent>
+		<groupId>org.formation</groupId>
+		<artifactId>parent-project</artifactId>
+		<version>1.0</version>
+	</parent>
+	<!--	<properties>-->
+	<!--		<log.level>DUMMY</log.level>-->
+	<!--	</properties>-->
+	<scm>
+		<url>https://github.com/dthibau/simple-weather</url>
+		<connection>scm:git:git://github.com/dthibau/simple-weather.git</connection>
+		<developerConnection>scm:git:git@github.com:dthibau/simple-weather.git</developerConnection>
+	</scm>
+	<dependencies>
+		<dependency>
+			<groupId>org.formation</groupId>
+			<artifactId>xml-libs</artifactId>
+			<version>1.0</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<filters>
+			<filter>dev.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>*.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/velocity</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<compilerVersion>1.8</compilerVersion>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus</id>
+			<url>http://localhost:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>nexus</id>
+			<url>http://localhost:8081/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
+	<profiles>
+		<profile>
+			<id>production</id>
+			<properties>
+				<log.level>ERROR</log.level>
+			</properties>
+			<build>
+				<!--				<filters>-->
+				<!--					<filter>prod.properties</filter>-->
+				<!--				</filters>-->
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<optimize>true</optimize>
+							<showWarnings>true</showWarnings>
+							<failOnWarning>true</failOnWarning>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<version>3.4.2</version>
+						<configuration>
+							<descriptorRefs>jar-with-dependencies</descriptorRefs>
+							<archive>
+								<manifest>
+									<mainClass>org.formation.weather.Main</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+						<executions>
+							<execution>
+								<id>assembly-single</id>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
